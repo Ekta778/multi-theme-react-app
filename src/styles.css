@@ -1,0 +1,28 @@
+/* styles.css – Theme styles */
+
+.theme1 {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+.theme2 {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: serif;
+  padding: 20px;
+}
+
+.theme3 {
+  background-color: #fce4ec;
+  color: #880e4f;
+  font-family: 'Pacifico', cursive;
+  padding: 20px;
+}
+
+/* Optional: Make links and text look better */
+a {
+  color: inherit;
+  text-decoration: none;
+}
