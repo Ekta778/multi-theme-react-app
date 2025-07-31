@@ -1,0 +1,29 @@
+// context/ThemeContext.tsx
+import React, { createContext, useState, useEffect } from 'react';
+
+export type ThemeType = 'theme1' | 'theme2' | 'theme3';
+
+export const ThemeContext = createContext<{
+  theme: ThemeType;
+  setTheme: (theme: ThemeType) => void;
+}>({ theme: 'theme1', setTheme: () => {} });
+
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [theme, setThemeState] = useState<ThemeType>('theme1');
+
+  useEffect(() => {
+    const stored = localStorage.getItem('theme') as ThemeType;
+    if (stored) setThemeState(stored);
+  }, []);
+
+  const setTheme = (theme: ThemeType) => {
+    localStorage.setItem('theme', theme);
+    setThemeState(theme);
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <div className={theme}>{children}</div>
+    </ThemeContext.Provider>
+  );
+};
