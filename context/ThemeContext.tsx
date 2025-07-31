@@ -1,29 +1,44 @@
-
 import React, { createContext, useState, useEffect } from 'react';
 
-export type ThemeType = 'theme1' | 'theme2' | 'theme3';
+// Theme types
+type ThemeType = 'theme1' | 'theme2' | 'theme3';
 
-export const ThemeContext = createContext<{
+// Context shape
+interface ThemeContextType {
   theme: ThemeType;
   setTheme: (theme: ThemeType) => void;
-}>({ theme: 'theme1', setTheme: () => {} });
+}
+
+// Create context
+export const ThemeContext = createContext<ThemeContextType>({
+  theme: 'theme1',
+  setTheme: () => {},
+});
+
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<ThemeType>('theme1');
 
+  // Load from localStorage when app starts
   useEffect(() => {
-    const stored = localStorage.getItem('theme') as ThemeType;
-    if (stored) setThemeState(stored);
+    const storedTheme = localStorage.getItem('theme') as ThemeType;
+    if (storedTheme) {
+      setThemeState(storedTheme);
+    }
   }, []);
 
-  const setTheme = (theme: ThemeType) => {
-    localStorage.setItem('theme', theme);
-    setThemeState(theme);
+  // Function to change theme and store in localStorage
+  const setTheme = (newTheme: ThemeType) => {
+    localStorage.setItem('theme', newTheme);
+    setThemeState(newTheme);
   };
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className={theme}>{children}</div>
+      {/* Apply theme as className to top div */}
+      <div className={theme}>
+        {children}
+      </div>
     </ThemeContext.Provider>
   );
 };
