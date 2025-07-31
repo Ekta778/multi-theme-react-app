@@ -1,0 +1,9 @@
+
+.theme1 {
+  --bg: white;
+  --text: black;
+  font-family: sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
