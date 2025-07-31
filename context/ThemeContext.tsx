@@ -1,4 +1,4 @@
-// context/ThemeContext.tsx
+
 import React, { createContext, useState, useEffect } from 'react';
 
 export type ThemeType = 'theme1' | 'theme2' | 'theme3';
